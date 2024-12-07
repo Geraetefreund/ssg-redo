@@ -82,5 +82,6 @@ class TestParentNode(unittest.TestCase):
         self.assertEqual(node.to_html(),
                          '<a href="https://boot.dev"><b>Bold text within a link</b></a>')
 
+
 if __name__ == "__main__":
     unittest.main()
