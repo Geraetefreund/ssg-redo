@@ -42,13 +42,18 @@ class TestTextNodeToHTMLNode(unittest.TestCase):
         self.assertEqual(html_node.tag, 'img')
         self.assertEqual(html_node.props, {"src": "https://www.boot.dev", "alt": "This is an image"})
 
-
     def test_unknown(self):
         node = TextNode("This should cause an exception!", "unknown")
         self.assertRaises(ValueError, text_node_to_html_node, node)
         with self.assertRaises(ValueError) as error:
             text_node_to_html_node(node)
         self.assertEqual(str(error.exception), f"Invalid text type: {node.text_type}")
+
+    def test_bold(self):
+        node = TextNode("This is bold", TextType.BOLD)
+        html_node = text_node_to_html_node(node)
+        self.assertEqual(html_node.tag, "b")
+        self.assertEqual(html_node.value, "This is bold")
 
 if __name__ == "__main__":
     unittest.main()
